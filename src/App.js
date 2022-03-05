@@ -1,10 +1,11 @@
-import React, {Component} from 'react';
+import React from 'react';
 //import logo from './logo.svg';
 import './App.css';
+import Homepage from './homepage/homepage.component';
 
 const App = () => (
   <div className='app'>
-    hello world
+    <Homepage/>
   </div>
 )
 
