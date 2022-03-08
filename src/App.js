@@ -1,10 +1,11 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
-import Homepage from './homepage/homepage.component';
+import Homepage from './pages/homepage/homepage.component';
+
 
 const App = () => (
   <div className='app'>
+    <h1>react app</h1>
     <Homepage/>
   </div>
 )
