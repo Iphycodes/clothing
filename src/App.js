@@ -1,11 +1,25 @@
 import React from 'react';
-//import logo from './logo.svg';
 import './App.css';
-import Homepage from './homepage/homepage.component';
+import Homepage from './pages/homepage/homepage.component';
+// import {
+//   //Switch,
+//   Route
+//   //Link
+// } from 'react-router-dom'
+
+
+export const HatsPage = () => (
+  <div>
+    <h1>Hats page</h1>
+  </div>
+)
+
 
 const App = () => (
   <div className='app'>
-    <Homepage/>
+    {/* <Route exact path = '/'> */}
+      <Homepage/>
+    {/* </Route> */}
   </div>
 )
 
