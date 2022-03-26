@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import './App.css';
 import Homepage from './pages/homepage/homepage.component';
 
@@ -10,22 +10,37 @@ import User from './pages/User';
 import Shop from './pages/Shop/ShopPage';
 import { Header } from './components/Header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
+import { auth } from './firebase/firebase.utils';
 
 
+const App = () => {
 
-const App = () => (
+  const [currentUser, setCurrentUser] = useState(null)
 
-  <div className='app'>
-    <Header/>
-    <Routes>
-      <Route exact path = '/' element = {<Homepage/>} />
-      <Route exact path = '/shop' element = {<Shop/>}/>
-      <Route exact path = '/sign-in' element = {<SignInAndSignUp/>}/>
-      <Route exact path = '/profile' element = {<Profile/>}>
-        <Route exact path = ':userid' element = {<User/>}/>
-      </Route>
-    </Routes>
-  </div>
-)
+  useEffect(() => {
+  auth.onAuthStateChanged(user => {
+      setCurrentUser(user);
+
+      console.log(currentUser)
+    })
+  })
+
+
+  return(
+
+    <div className='app'>
+      <Header currentUser = {currentUser}/>
+      <Routes>
+        <Route exact path = '/' element = {<Homepage/>} />
+        <Route exact path = '/shop' element = {<Shop/>}/>
+        <Route exact path = '/sign-in' element = {<SignInAndSignUp/>}/>
+        <Route exact path = '/profile' element = {<Profile/>}>
+          <Route exact path = ':userid' element = {<User/>}/>
+        </Route>
+      </Routes>
+    </div>
+  )
+}
+
 
 export default App;

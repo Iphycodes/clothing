@@ -1,9 +1,7 @@
-import firebase from 'firebase/app'
-
 import { initializeApp } from 'firebase/app';
 
 import {getAuth, GoogleAuthProvider, signInWithPopup} from 'firebase/auth'
-import {getFirestore} from 'firebase/firestore'
+// import {getFirestore} from 'firebase/firestore'
 
 
 const config = {
@@ -19,19 +17,45 @@ const config = {
 
 const app = initializeApp(config);
 
-const auth = getAuth(app)
-const firestore = getFirestore(app)
+export const auth = getAuth(app)
+// const firestore = getFirestore(app)
 
-
-const provider = new GoogleAuthProvider()
-
+const provider = {
+    googleProvider: new GoogleAuthProvider()
+}
 
 auth.languageCode = 'it'
 
-provider.setCustomParameters({
-    'prompt' : 'select-account'
+provider.googleProvider.setCustomParameters({
+    'prompt' : 'select_account'
 })
 
-export const signInWithGoogle = () => {
-    signInWithPopup()
+export const signInWithGoogle = async () => {
+
+    let userDetail = null;
+
+    await signInWithPopup(auth, provider.googleProvider)
+    .then((result) => {
+        // This gives you a Google Access Token. You can use it to access the Google API.
+        const credential = GoogleAuthProvider.credentialFromResult(result);
+        const token = credential.accessToken;
+        // The signed-in user info.
+        const user = result.user;
+
+
+        userDetail = user
+        // ...
+
+      }).catch((error) => {
+        // Handle Errors here.
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        // The email of the user's account used.
+        const email = error.email;
+        // The AuthCredential type that was used.
+        const credential = GoogleAuthProvider.credentialFromError(error);
+        // ...
+      });
+
+      return userDetail;
 }
