@@ -11,6 +11,8 @@ import Shop from './pages/Shop/ShopPage';
 import { Header } from './components/Header/header.component';
 import SignInAndSignUp from './pages/sign-in-and-sign-up/sign-in-and-sign-up.component';
 import { auth } from './firebase/firebase.utils';
+import { createUserData } from './firebase/test';
+import { getDoc, onSnapshot } from 'firebase/firestore';
 
 
 const App = () => {
@@ -18,16 +20,33 @@ const App = () => {
   const [currentUser, setCurrentUser] = useState(null)
 
   useEffect(() => {
-  auth.onAuthStateChanged(user => {
-      setCurrentUser(user);
+  auth.onAuthStateChanged(async userAuth => {
+      // setCurrentUser(user);
+      if(userAuth){
+        const userRef = await createUserData(userAuth)
 
-      console.log(currentUser)
+        onSnapshot(userRef, (snapshot) => {
+          
+          setCurrentUser({
+            id: snapshot.id,
+            ...snapshot.data()
+          })
+          
+        })
+        
+      }
+      else{
+        setCurrentUser(userAuth)
+      }
+
     })
-  })
+
+  }, [])
 
 
   return(
-
+    <>
+    {console.log(currentUser)}
     <div className='app'>
       <Header currentUser = {currentUser}/>
       <Routes>
@@ -39,6 +58,7 @@ const App = () => {
         </Route>
       </Routes>
     </div>
+    </>
   )
 }
 
