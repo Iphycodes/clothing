@@ -10,7 +10,6 @@ export const MenuItem = ({title, imageUrl, size, linkUrl}) => {
 
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(location.pathname)
     return (
         <div className = {`${size} menu-item`}>
         <div className = "background-image" onClick = {() => {navigate(`${location.pathname}${linkUrl}`)}} style={

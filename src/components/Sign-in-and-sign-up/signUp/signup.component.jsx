@@ -1,5 +1,5 @@
 import { createUserWithEmailAndPassword } from "firebase/auth";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { auth } from "../../../firebase/firebase.utils";
 import { createUserData } from "../../../firebase/test";
 import { CustomButton } from "../../custom-button/custom-button.component";
@@ -50,11 +50,9 @@ export const SignUp = () => {
         if(password === confirmPsw){
 
             try{
-                const {user} = createUserWithEmailAndPassword(auth, email, password)
+                createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const uc = userCredential.user
-
-                    // console.log(uc)
                     
                     uc.displayName = username
 
@@ -64,7 +62,7 @@ export const SignUp = () => {
                     console.error(err)
                 })
 
-                console.log(user)
+                // console.log(user)
             }
             catch(err){
                 console.error(err)

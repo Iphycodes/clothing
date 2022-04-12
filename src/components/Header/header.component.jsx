@@ -1,15 +1,16 @@
 import React from "react";
-
 import {Link} from 'react-router-dom'
-
 import '../Header/header.styles.scss'
-
 import {ReactComponent as Logo} from '../../assets/crown.svg'
-
 import {auth} from '../../firebase/firebase.utils'
+import { useSelector } from "react-redux";
 
 
-export const Header = ({currentUser}) => (
+
+export const Header = () => {
+
+const currentUser = useSelector(state => (state.user.currentUser))
+return (
 
     <div className="header">
         <Link to='/' className="logo-container">
@@ -18,8 +19,8 @@ export const Header = ({currentUser}) => (
         <div className="options">
             <Link to='/shop' className="option">SHOP</Link>
             <Link to='/profile' className="option">PROFILE</Link>
+           
             {currentUser ? 
-            
             (
             <div className="option" onClick = {() => auth.signOut()}>
                 SIGN-OUT
@@ -33,7 +34,7 @@ export const Header = ({currentUser}) => (
         </div>
         
     </div>
-    
+    )
+}
 
-    
-)
+export default Header;

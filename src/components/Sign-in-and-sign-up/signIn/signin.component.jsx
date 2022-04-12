@@ -6,7 +6,7 @@ import '../signIn/signin.style.scss'
 
 import { CustomButton } from "../../custom-button/custom-button.component";
 import { auth, signInWithGoogle } from "../../../firebase/firebase.utils";
-import { createUserData } from "../../../firebase/test";
+// import { createUserData } from "../../../firebase/test";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 
