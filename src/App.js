@@ -36,7 +36,6 @@ const App = () => {
           }))
           
         })
-       
       }
       else{
         dispatch(setCurrentUser(userAuth))
