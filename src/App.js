@@ -15,9 +15,11 @@ import { createUserData } from './firebase/test';
 import { onSnapshot } from 'firebase/firestore';
 import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.reducer';
+import CheckOutPage from './pages/checkOutPage/checkOutPage.component';
 
 const App = () => {
   const currentUser = useSelector(state => (state.user.currentUser))
+  const cartItems = useSelector(state => state.cart.cartItem)
   const dispatch = useDispatch()
  
 
@@ -60,9 +62,9 @@ const App = () => {
         <Route exact path = '/profile' element = {<Profile/>}>
           <Route exact path = ':userid' element = {<User/>}/>
         </Route>
+        <Route exact path = '/checkout' element={cartItems.length ? <CheckOutPage/> : <Navigate to='/shop' replace/>}></Route>
       </Routes>
     </div>
-    
     </>
   )
 }

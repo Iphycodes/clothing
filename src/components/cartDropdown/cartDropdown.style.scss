@@ -19,7 +19,33 @@
       height: 240px;
       display: flex;
       flex-direction: column;
-      overflow: scroll;
+      overflow-y: auto;
+
+      .empty-cart{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        span{
+          font-size: 20px;
+          font-weight: 500;
+          margin-top: 30px;
+        }
+      }
+
+      &::-webkit-scrollbar{
+        width: 7px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: grey;
+        border-radius: 10px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: black;
+        border-radius: 10px;
+      }
     }
   
     button {
