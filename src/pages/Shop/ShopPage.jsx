@@ -1,22 +1,17 @@
-import React, { useEffect, useState } from "react";
-
-import SHOP_DATA from "../../shop.data";
-
-import { CollectionPreview } from "../../components/collection-preview/collectionPreview.component";
+import React from "react";
+import { Outlet, Route, Routes, useLocation } from "react-router-dom";
+import { CollectionOverview} from "../../components/collection-overview/collection-overview.component";
 
 const Shop = () => {
+    const location = useLocation()
 
-    const [collections, setCollections] = useState([])
-
-    useEffect(() => {
-        setCollections(SHOP_DATA)
-    }, [])
+    console.log(location.pathname)
 
     return(
         <div>
-            {collections.map(({id, ...rest}) => (
-                <CollectionPreview key={id} {...rest}/>
-            ))}
+            {/* <CollectionOverview/> */}
+            <CollectionOverview/>
+            {/* <Outlet/> */}
         </div>
     )
 }
