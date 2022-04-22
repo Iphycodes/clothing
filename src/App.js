@@ -17,6 +17,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setCurrentUser } from './redux/user/user.reducer';
 import CheckOutPage from './pages/checkOutPage/checkOutPage.component';
 import { CollectionPage } from './pages/collection-page/collection-page.component';
+import { CollectionOverview } from './components/collection-overview/collection-overview.component';
 
 
 const App = () => {
@@ -59,7 +60,8 @@ const App = () => {
       <Header/>
       <Routes>
         <Route exact path = '/' element = {<Homepage/>} />
-        <Route exact path = '/shop' element = {<Shop/>}>
+        <Route exact path = '/shop/*' element = {<Shop/>}>
+          <Route exact path='' element={<CollectionOverview/>}/>
           <Route exact path = ':categoryId' element = {<CollectionPage/>}/>
           {/* <Route exact path = '*' element = {<Shop/>}/> */}
         </Route>

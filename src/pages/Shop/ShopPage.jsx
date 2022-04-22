@@ -10,8 +10,10 @@ const Shop = () => {
     return(
         <div>
             {/* <CollectionOverview/> */}
-            <CollectionOverview/>
-            {/* <Outlet/> */}
+            {/* <Routes>
+                <Route path='/shop' element={<CollectionOverview/>}/>
+            </Routes> */}
+            <Outlet/>
         </div>
     )
 }
